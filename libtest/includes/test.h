@@ -23,5 +23,8 @@ typedef	struct	s_error
 
 void	push_back_error(t_error **err_vec, int test_num, char *message);
 void	print_errors(t_error **err_vec);
+void	free_err_vec(t_error **err_vec, int ERR_VEC);
 
 void	ft_memset_test(void);
+void	ft_bzero_test(void);
+void	ft_memcpy_test(void);

@@ -14,7 +14,7 @@ static int	is_ok_value(void *resc, void *reso)
 	return (1);
 }
 
-void		ft_memset_test(void)
+void		ft_memcpy_test(void)
 {
 	t_error **err_vec = (t_error**)calloc(ERRVEC_SIZE, sizeof(t_error*));
 
@@ -55,7 +55,7 @@ void		ft_memset_test(void)
 	free(bo);
 	DIR *d;
 	struct dirent *dir;
-	char *dirname = "./src/crush_bin/ft_memset/";
+	char *dirname = "./src/crush_bin/ft_memcpy/";
 	d = opendir(dirname);
 	char *bin = (char*)malloc(sizeof(char) * MSG_SIZE);
 	while ((dir = readdir(d)) != NULL)

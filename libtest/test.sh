@@ -15,9 +15,9 @@ make
 IS_BUILD_OK="$(find . -name "libft.a" -print)"
 printf "make:\t\t"
 if [[ -z "$IS_BUILD_OK" ]]; then
-	printf "${RED}FAIL\n${NC}"
+	printf "${RED}[FAIL]\n${NC}"
 else
-	printf "${GREEN}OK\n${NC}"
+	printf "${GREEN}[OK]\n${NC}"
 fi
 
 # testing make fclean
@@ -25,9 +25,9 @@ make fclean
 IS_FCLEAN_OK="$(find . \( -name "*.o" -o -name "libft.a" \) -print)"
 printf "make fclean:\t"
 if [[ -n "$IS_FCLEAN_OK" ]]; then
-	printf "${RED}FAIL\n${NC}"
+	printf "${RED}[FAIL]\n${NC}"
 else
-	printf "${GREEN}OK\n${NC}"
+	printf "${GREEN}[OK]\n${NC}"
 fi
 
 # testing make re
@@ -35,9 +35,9 @@ make re
 IS_BUILD_OK="$(find . -name "libft.a" -print)"
 printf "make re:\t"
 if [[ -z "$IS_BUILD_OK" ]]; then
-	printf "${RED}FAIL\n${NC}"
+	printf "${RED}[FAIL]\n${NC}"
 else
-	printf "${GREEN}OK\n${NC}"
+	printf "${GREEN}[OK]\n${NC}"
 fi
 
 # testing make clean
@@ -46,10 +46,10 @@ IS_CLEAN_OK="$(find . -name "*.o" -print)"
 LIBFT_EXIST="$(find . -name "libft.a" -print)"
 printf "make clean:\t"
 if [[ -n "$IS_CLEAN_OK" || -z "$LIBFT_EXIST" ]]; then
-	printf "${RED}FAIL\n${NC}"
+	printf "${RED}[FAIL]\n${NC}"
 	exit
 else
-	printf "${GREEN}OK\n${NC}"
+	printf "${GREEN}[OK]\n${NC}"
 fi
 
 # ***************************** building tests ****************************** #
@@ -65,8 +65,10 @@ CRUSH_BINS="$(find . -name "ft*" -print)"
 # if [[ -z "$CRUSH_BINS" ]]; then
 	CRUSH_SRCS="$(find ../crush_srcs -name "*.c" -print)"
 	for SRC in $CRUSH_SRCS; do
-		BIN="$(echo $SRC | rev | cut -d '.' -f 2 | cut -d '/' -f 1 | rev)"
-		gcc -Wall -Wextra -Werror $SRC -I ../../includes/ -L../../ -lft -o $BIN
+		BIN="$(echo $SRC | rev | cut -d '.' -f 2 | cut -d '/' -f 1| rev)"
+		DIR="$(echo $SRC | rev | cut -d '.' -f 2 | cut -d '/' -f 2| rev)"
+		mkdir -p $DIR
+		gcc -Wall -Wextra -Werror $SRC -I ../../includes/ -L../../ -lft -o $DIR/$BIN
 	done
 # fi
 cd ../../

@@ -1,7 +1,5 @@
 #include "libft.h"
-#include <string.h>
-#include <stdlib.h>
-#include <limits.h>
+#include "test.h"
 
 #define PTR_SIZE 	1
 
