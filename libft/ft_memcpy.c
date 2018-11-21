@@ -7,6 +7,9 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	byte	*src_byte_ptr;
 	size_t	i;
 
+// FIXME: check equality
+	if (src == dst)
+		return (dst);
 	dst_byte_ptr = (byte*)dst;
 	src_byte_ptr = (byte*)src;
 	i = -1;

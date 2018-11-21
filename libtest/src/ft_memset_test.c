@@ -64,7 +64,7 @@ void		ft_memset_test(void)
 			continue ;
 		sprintf(bin, "%s%s", dirname, dir->d_name);
 		int retval = system(bin);
-		int n = dir->d_name[0] - '0';
+		int n = atoi(dir->d_name);
 		if ((n % 2) == 0)
 		{
 			if (!WIFSIGNALED(retval))
