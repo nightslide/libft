@@ -2,7 +2,7 @@
 
 int		main(void)
 {
-	printf("ft_memset:\t");
+	printf("%sft_memset:\t", KYEL);
 	ft_memset_test();
 	return (0);
 }

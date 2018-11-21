@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# commands
-gf="gcc -Wall -Wextra -Werror -L. -l_libft"
-
 # colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -55,12 +52,27 @@ else
 	printf "${GREEN}OK\n${NC}"
 fi
 
-# *************************** testing first part **************************** #
+# ***************************** building tests ****************************** #
 
-printf "${ORANGE}testing first part...\n${NC}"
+printf "${ORANGE}building tests...\n${NC}"
 
 # building tests
 cd ../libtest
 cp ../libft/libft.h ./includes/
 cp ../libft/libft.a .
-make
+cd ./src/crush_bin
+CRUSH_BINS="$(find . -name "ft*" -print)"
+# if [[ -z "$CRUSH_BINS" ]]; then
+	CRUSH_SRCS="$(find ../crush_srcs -name "*.c" -print)"
+	for SRC in $CRUSH_SRCS; do
+		BIN="$(echo $SRC | rev | cut -d '.' -f 2 | cut -d '/' -f 1 | rev)"
+		gcc -Wall -Wextra -Werror $SRC -I ../../includes/ -L../../ -lft -o $BIN
+	done
+# fi
+cd ../../
+make re
+
+# *************************** testing first part **************************** #
+
+printf "${ORANGE}testing first part...\n${NC}"
+./check
