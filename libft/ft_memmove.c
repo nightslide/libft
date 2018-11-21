@@ -8,6 +8,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	byte	swap_byte;
 	size_t	i;
 
+	if (src == dst)
+		return (dst);
 	dst_byte_ptr = (byte*)dst;
 	src_byte_ptr = (byte*)src;
 	i = -1;

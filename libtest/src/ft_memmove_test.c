@@ -14,7 +14,7 @@ static int	is_ok_value(void *resc, void *reso)
 	return (1);
 }
 
-void		ft_memcpy_test(void)
+void		ft_memmove_test(void)
 {
 	t_error **err_vec = (t_error**)calloc(ERRVEC_SIZE, sizeof(t_error*));
 
@@ -44,7 +44,7 @@ void		ft_memcpy_test(void)
 			if (ok_flag == 0)
 			{
 				char *msg = (char*)malloc(sizeof(char) * MSG_SIZE);
-				sprintf(msg, "ft_memcpy(dst, src, %ld) dst_size = src_size = %d", len, PTR_SIZE);
+				sprintf(msg, "ft_memmove(dst, src, %ld) dst_size = src_size = %d", len, PTR_SIZE);
 				push_back_error(err_vec, i + 1, msg);
 				free(msg);
 			}
@@ -57,7 +57,7 @@ void		ft_memcpy_test(void)
 	free(src);
 	DIR *d;
 	struct dirent *dir;
-	char *dirname = "./src/crush_bin/ft_memcpy/";
+	char *dirname = "./src/crush_bin/ft_memmove/";
 	d = opendir(dirname);
 	char *bin = (char*)malloc(sizeof(char) * MSG_SIZE);
 	while ((dir = readdir(d)) != NULL)

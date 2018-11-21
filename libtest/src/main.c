@@ -8,5 +8,7 @@ int		main(void)
 	ft_bzero_test();
 	printf("%sft_memcpy:\t", KYEL);
 	ft_memcpy_test();
+	printf("%sft_memmove:\t", KYEL);
+	ft_memmove_test();
 	return (0);
 }

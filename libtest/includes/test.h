@@ -28,3 +28,4 @@ void	free_err_vec(t_error **err_vec, int ERR_VEC);
 void	ft_memset_test(void);
 void	ft_bzero_test(void);
 void	ft_memcpy_test(void);
+void	ft_memmove_test(void);
