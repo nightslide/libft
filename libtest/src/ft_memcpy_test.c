@@ -4,55 +4,57 @@
 #define MSG_SIZE 	50
 #define ERRVEC_SIZE 20
 
-// static int	is_ok_value(void *resc, void *reso)
-// {
-// 	for (int i = 0; i < PTR_SIZE; i++)
-// 	{
-// 		if (((unsigned char*)resc)[i] != ((unsigned char*)reso)[i])
-// 			return (0);
-// 	}
-// 	return (1);
-// }
+static int	is_ok_value(void *resc, void *reso)
+{
+	for (int i = 0; i < PTR_SIZE; i++)
+	{
+		if (((unsigned char*)resc)[i] != ((unsigned char*)reso)[i])
+			return (0);
+	}
+	return (1);
+}
 
 void		ft_memcpy_test(void)
 {
-// 	t_error **err_vec = (t_error**)calloc(ERRVEC_SIZE, sizeof(t_error*));
+	t_error **err_vec = (t_error**)calloc(ERRVEC_SIZE, sizeof(t_error*));
 
-// 	void *bc = (void*)malloc(sizeof(unsigned char) * PTR_SIZE);
-// 	void *bo = (void*)malloc(sizeof(unsigned char) * PTR_SIZE);
+	void *dstc = (void*)malloc(sizeof(unsigned char) * PTR_SIZE);
+	void *dsto = (void*)malloc(sizeof(unsigned char) * PTR_SIZE);
+	void *src = (void*)malloc(sizeof(unsigned char) * PTR_SIZE);
 
-// 	for (int i = 0; i < PTR_SIZE; i++)
-// 	{
-// 		memset(bo, 0, PTR_SIZE);
-// 		memset(bo, 0, PTR_SIZE);
-// 		int c = i - 1;
-// 		size_t len = i;
-// 		void *resc = ft_memset(bc, c, len);
-// 		void *reso = memset(bo, c, len);
-// 		int ok_flag = is_ok_value(resc, reso);
-// 		if ((resc != bc) || (ok_flag == 0))
-// 		{
-// 			printf("%s[FAIL] %s", KRED, KNRM);
-// 			if (resc != bc)
-// 			{
-// 				char *msg = (char*)malloc(sizeof(char) * MSG_SIZE);
-// 				sprintf(msg, "returned ptr doesn't match the given one");
-// 				push_back_error(err_vec, i + 1, msg);
-// 				free(msg);
-// 			}
-// 			if (ok_flag == 0)
-// 			{
-// 				char *msg = (char*)malloc(sizeof(char) * MSG_SIZE);
-// 				sprintf(msg, "ft_memset(ptr, %d, %ld) ptr_size = %d", c, len, PTR_SIZE);
-// 				push_back_error(err_vec, i + 1, msg);
-// 				free(msg);
-// 			}
-// 		}
-// 		else
-// 			printf("%s[OK] %s", KGRN, KNRM);
-// 	}
-// 	free(bc);
-// 	free(bo);
+	for (int i = 0; i < PTR_SIZE; i++)
+	{
+		memset(src, i, PTR_SIZE);
+		memset(dstc, 0, PTR_SIZE);
+		memset(dsto, 0, PTR_SIZE);
+		size_t len = i;
+		void *resc = ft_memcpy(dstc, src, len);
+		void *reso = memcpy(dsto, src, len);
+		int ok_flag = is_ok_value(resc, reso);
+		if ((resc != dstc) || (ok_flag == 0))
+		{
+			printf("%s[FAIL] %s", KRED, KNRM);
+			if (resc != dstc)
+			{
+				char *msg = (char*)malloc(sizeof(char) * MSG_SIZE);
+				sprintf(msg, "returned ptr doesn't match the given one");
+				push_back_error(err_vec, i + 1, msg);
+				free(msg);
+			}
+			if (ok_flag == 0)
+			{
+				char *msg = (char*)malloc(sizeof(char) * MSG_SIZE);
+				sprintf(msg, "ft_memcpy(dst, src, %ld) dst_size = %d, src_size = %d", len, PTR_SIZE, i);
+				push_back_error(err_vec, i + 1, msg);
+				free(msg);
+			}
+		}
+		else
+			printf("%s[OK] %s", KGRN, KNRM);
+	}
+	free(dstc);
+	free(dsto);
+	free(src);
 	DIR *d;
 	struct dirent *dir;
 	char *dirname = "./src/crush_bin/ft_memcpy/";

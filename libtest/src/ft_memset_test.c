@@ -23,7 +23,7 @@ void		ft_memset_test(void)
 
 	for (int i = 0; i < PTR_SIZE; i++)
 	{
-		memset(bo, 0, PTR_SIZE);
+		memset(bc, 0, PTR_SIZE);
 		memset(bo, 0, PTR_SIZE);
 		int c = i - 1;
 		size_t len = i;
