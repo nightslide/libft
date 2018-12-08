@@ -20,7 +20,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 			free(res);
 			return (NULL);
 		}
-		ft_memccpy(res->content, content, content_size);
+		ft_memcpy(res->content, content, content_size);
 	}
 	res->next = NULL;
 	return (res);

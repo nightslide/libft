@@ -2,10 +2,5 @@
 
 int		ft_isalnum(int c)
 {
-	byte	value;
-
-	value = (byte)c;
-	if (((value >= '0') && (value <= '9')) || ((value >= 'A') && (value <= 'z')))
-		return (1);
-	return (0);
+	return (ft_isalpha(c) + ft_isdigit(c));
 }

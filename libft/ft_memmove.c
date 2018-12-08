@@ -3,25 +3,26 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	byte	*dst_byte_ptr;
-	byte	*src_byte_ptr;
-	byte	swap_byte;
+	byte	*dst_b;
+	byte	*src_b;
 	size_t	i;
 
-	if (src == dst)
+	if ((src == dst) || (len == 0))
 		return (dst);
-	dst_byte_ptr = (byte*)dst;
-	src_byte_ptr = (byte*)src;
-	i = -1;
-	while (++i < len)
+	dst_b = (byte*)dst;
+	src_b = (byte*)src;
+	if (((dst_b - src_b) <= (long)len) && ((dst_b - src_b) > 0))
 	{
-		if ((dst_byte_ptr + i) == (src_byte_ptr + i))
-		{
-			swap_byte = src_byte_ptr[i];
-			dst_byte_ptr[i] = swap_byte;
-		}
-		else
-			dst_byte_ptr[i] = src_byte_ptr[i];
+		i = len;
+		while (--i > 0)
+			dst_b[i] = src_b[i];
+		dst_b[i] = src_b[i];
+	}
+	else
+	{
+		i = -1;
+		while (++i < len)
+			dst_b[i] = src_b[i];
 	}
 	return (dst);
 }

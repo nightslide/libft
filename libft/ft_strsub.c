@@ -4,15 +4,11 @@
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char			*res;
-	unsigned int	i;
 
 	if (s == NULL)
 		return (NULL);
-	res = ft_strnew(len);
-	if (res == NULL)
+	if ((res = ft_strnew(len)) == NULL)
 		return (NULL);
-	i = 0;
-	while (i < len)
-		res[i] = s[start + i];
+	ft_strncpy(res, s + start, len);
 	return (res);
 }

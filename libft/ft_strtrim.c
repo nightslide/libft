@@ -22,11 +22,10 @@ char		*ft_strtrim(char const *s)
 	while (is_whitespace(s[i]) && s[i])
 		i++;
 	j = ft_strlen(s) - 1;
-	while (is_whitespace(s[i]) && (j > i))
+	while (is_whitespace(s[j]) && (j > i))
 		j--;
 	len = j - i + 1;
-	res = ft_strnew(len);
-	if (res == NULL)
+	if ((res = ft_strnew(len)) == NULL)
 		return (NULL);
 	ft_strncpy(res, s + i, len);
 	return (res);

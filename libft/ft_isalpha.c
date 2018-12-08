@@ -2,10 +2,7 @@
 
 int		ft_isalpha(int c)
 {
-	byte	value;
-
-	value = (byte)c;
-	if ((value >= 'A') && (value <= 'z'))
+	if (((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')))
 		return (1);
 	return (0);
 }

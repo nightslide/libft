@@ -1,100 +1,78 @@
-#include <string.h>
 #include "libft.h"
+#include <string.h>
 #include <stdlib.h>
 
-static void		free_array(char **a, int k)
+int		get_word_count(char *s, char c)
 {
-	int		i;
-
-	if (a == NULL)
-		return ;
-	i = 0;
-	while (i < k)
-		free(a[i++]);
-	if (k > 0)
-		free(a);
-}
-
-static char		*ft_strtrim_by_del(char *s, char del)
-{
-	int		i;
-	int		j;
-
-	if (ft_strlen(s) == 0)
-		return (s);
-	i = 0;
-	while ((s[i] == del) && s[i])
-		i++;
-	j = ft_strlen(s) - 1;
-	while ((s[j] == del) && (j > i))
-		j--;
-	s = s + i;
-	s[j - i + 1] = '\0';
-	return (s);
-}
-
-static char		**realloc_array(char **a, int old_len, int new_len)
-{
-	char	**tmp;
-	int		i;
-
-	if ((tmp = (char**)malloc(new_len * sizeof(char*))) == NULL)
-	{
-		free_array(a, old_len);
-		return (NULL);
-	}
-	i = -1;
-	while (++i < old_len)
-		tmp[i] = a[i];
-	if (old_len > 0)
-		free(a);
-	return (tmp);
-}
-
-static char		*get_new_word(char **a, int k, char *trimmed, char c)
-{
-	char	*del_pos;
-	size_t	len;
-	size_t	trim_len;
-
-	trim_len = ft_strlen(trimmed);
-	if ((del_pos = strchr(trimmed, c)) == NULL)
-		len = trim_len;
-	else
-		len = del_pos - trimmed;
-	if ((a[k] = ft_strnew(len)) == NULL)
-		return (NULL);
-	a[k] = ft_strncpy(a[k], trimmed, len);
-	if (trim_len == 0)
-		return (a[0]);
-	return (trimmed + len);
-}
-
-char		**ft_strsplit(char const *s, char c)
-{
-	char	*trim;
+	char	*tmp;
 	int		k;
-	char	**a;
-	char	*cpy;
 
-	if (s == NULL)
-		cpy = ft_strnew(0);
-	else
-		cpy = ft_strdup(s);
-	if ((trim = cpy) == NULL)
-		return (NULL);
 	k = 0;
-	while (++k && (a = realloc_array(a, k - 1, k)) && (trim != *a))
+	while (*s)
 	{
-		trim = ft_strtrim_by_del(trim, c);
-		if ((trim = get_new_word(a, k - 1, trim, c)) == NULL)
-			break ;
+		while ((*s == c) && *s)
+			s++;
+		tmp = s;
+		while ((*tmp != c) && *tmp)
+			tmp++;
+		if (tmp != s)
+			k++;
+		s = tmp;
 	}
-	free(cpy);
-	if ((a == NULL) || (trim == NULL))
+	return (k);
+}
+
+void	free_res(char **res)
+{
+	int i;
+
+	i = 0;
+	while (res[i])
+		free(res[i++]);
+	free(res);
+}
+
+char	**store_words(char *s, char c, char **res, int len)
+{
+	char	*tmp;
+	int		k;
+
+	if (len == 0)
+		return (res);
+	k = 0;
+	while (*s)
 	{
-		free_array(a, k);
+		while ((*s == c) && *s)
+			s++;
+		tmp = s;
+		while ((*tmp != c) && *tmp)
+			tmp++;
+		if (tmp != s)
+		{
+			if ((res[k] = ft_strsub(s, 0, tmp - s)) == NULL)
+				return (NULL);
+			k++;
+		}
+		s = tmp;
+	}
+	return (res);
+}
+
+char	**ft_strsplit(char const *s, char c)
+{
+	char	**res;
+	int		len;
+	int		i;
+
+	len = (s == NULL) ? (1) : (get_word_count((char*)s, c) + 1);
+	if ((res = (char**)malloc(sizeof(char*) * len)) == NULL)
+		return (NULL);
+	res[len - 1] = NULL;
+	i = 0;
+	if (store_words((char*)s, c, res, len - 1) == NULL)
+	{
+		free_res(res);
 		return (NULL);
 	}
-	return (&a[0]);
+	return (res);
 }
