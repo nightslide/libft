@@ -2,10 +2,7 @@
 
 int		ft_tolower(int c)
 {
-	byte	value;
-
-	value = (byte)c;
-	if ((value >= 'A') && (value <= 'Z'))
-		return (value + ('a' - 'A'));
-	return (value);
+	if ((c >= 'A') && (c <= 'Z'))
+		return (c + ('a' - 'A'));
+	return (c);
 }

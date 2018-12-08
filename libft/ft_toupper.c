@@ -2,10 +2,7 @@
 
 int		ft_toupper(int c)
 {
-	byte	value;
-
-	value = (byte)c;
-	if ((value >= 'a') && (value <= 'z'))
-		return (value - ('a' - 'A'));
-	return (value);
+	if ((c >= 'a') && (c <= 'z'))
+		return (c - ('a' - 'A'));
+	return (c);
 }

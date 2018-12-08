@@ -2,10 +2,7 @@
 
 int		ft_isascii(int c)
 {
-	byte	value;
-
-	value = (byte)c;
-	if ((value >= 0) && (value <= 127))
+	if ((c >= 0) && (c <= 127))
 		return (1);
 	return (0);
 }
