@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int		get_word_count(char *s, char c)
+static int	get_word_count(char *s, char c)
 {
 	char	*tmp;
 	int		k;
@@ -22,7 +22,7 @@ int		get_word_count(char *s, char c)
 	return (k);
 }
 
-void	free_res(char **res)
+static void	free_res(char **res)
 {
 	int i;
 
@@ -32,7 +32,7 @@ void	free_res(char **res)
 	free(res);
 }
 
-char	**store_words(char *s, char c, char **res, int len)
+static char	**store_words(char *s, char c, char **res, int len)
 {
 	char	*tmp;
 	int		k;
@@ -58,7 +58,7 @@ char	**store_words(char *s, char c, char **res, int len)
 	return (res);
 }
 
-char	**ft_strsplit(char const *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
 	char	**res;
 	int		len;
