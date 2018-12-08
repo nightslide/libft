@@ -22,9 +22,9 @@ static int	ft_isdigit(char c)
 
 int			ft_atoi(const char *str)
 {
-	int		i;
-	int		minus_flag;
-	long	acc;
+	int			i;
+	int			minus_flag;
+	long long int	acc;
 
 	i = 0;
 	minus_flag = 0;
